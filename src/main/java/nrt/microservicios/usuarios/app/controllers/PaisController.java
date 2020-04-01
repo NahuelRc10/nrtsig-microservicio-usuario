@@ -11,4 +11,5 @@ import nrt.microservicios.usuarios.app.services.PaisService;
 @RequestMapping("/pais")
 public class PaisController extends CommonController<Pais, PaisService> {
 
+	//git
 }
