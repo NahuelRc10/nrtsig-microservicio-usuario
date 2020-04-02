@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "alumnos")
@@ -24,28 +26,37 @@ public class Alumno {
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "legajo")
+	@NotNull
 	private Long legajo;
 	@Column(name = "tipo_documento")
+	@NotEmpty
 	private String tipoDocumento;
 	@Column(name = "nro_documento")
+	@NotNull
 	private Long numeroDocumento;
 	@Column(name = "nombre")
+	@NotEmpty
 	private String nombre;
 	@Column(name = "apellido")
+	@NotEmpty
 	private String apellido;
 	@Column(name = "email")
 	@Email
 	private String email;
 	@Column(name = "telefono")
+	@NotEmpty
 	private String telefono;
 	@Column(name = "fecha_nacimiento")
+	@NotNull
 	private Date fechaNacimiento;
 	@Column(name = "create_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createAt;
 	@Column(name = "cuit")
+	@NotNull
 	private String cuit;
 	@Column(name = "sexo")
+	@NotEmpty
 	private String sexo;
 	@ManyToOne
 	@JoinColumn(name = "id_ciudad")

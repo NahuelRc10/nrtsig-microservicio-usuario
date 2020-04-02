@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "domicilios")
@@ -20,8 +22,10 @@ public class Domicilio {
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "direccion")
+	@NotEmpty
 	private String direccion;
 	@Column(name = "numero")
+	@NotNull
 	private Integer numero;
 	@Column(name = "nro_departamento")
 	private Integer nroDepartamento;
