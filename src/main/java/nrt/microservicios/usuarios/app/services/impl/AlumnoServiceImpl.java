@@ -37,5 +37,24 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		 
 		return alumnoRepository.save(alumnoDb);
 	}
+
+	@Override
+	public Alumno save(Alumno alumno) throws Exception {
+		// Validamos que el alumno no exista en la base de datos
+		Long id = alumnoRepository.getIdAlumnoByTipoDocumentoAndNroDocumento(alumno.getTipoDocumento(), alumno.getNumeroDocumento());
+		if (id != null) {
+			throw new Exception("El alumno ya existe en la base de datos");
+		}
+		return alumnoRepository.save(alumno);
+	}
+
+	@Override
+	public Long obtenerUltimoLegajo() {
+		Long ultimoLegajo = alumnoRepository.getMaximoLegajo();
+		return ultimoLegajo;
+	}
+	
+	
+	
 	
 }
