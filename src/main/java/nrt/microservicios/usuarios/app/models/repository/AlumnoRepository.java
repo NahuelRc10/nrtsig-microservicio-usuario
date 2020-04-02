@@ -10,6 +10,6 @@ public interface AlumnoRepository extends PagingAndSortingRepository<Alumno, Lon
 	@Query("select id from alumnos where tipo_documento = ?1 and nro_documento = ?2")
 	public Long getIdAlumnoByTipoDocumentoAndNroDocumento(String tipo_documento, Long numeroDocumento);
 	
-	@Query("select max(legajo) from alumnos")
+	@Query(value = "select max(a.legajo) from alumnos a", nativeQuery = true)
 	public Long getMaximoLegajo();
 }
