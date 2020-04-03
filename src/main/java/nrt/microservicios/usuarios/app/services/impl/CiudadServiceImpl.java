@@ -3,12 +3,14 @@ package nrt.microservicios.usuarios.app.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import nrt.microservicios.commons.services.CommonServiceImpl;
 import nrt.microservicios.usuarios.app.models.entity.Ciudad;
 import nrt.microservicios.usuarios.app.models.repository.CiudadRepository;
 import nrt.microservicios.usuarios.app.services.CiudadService;
 
+@Service
 public class CiudadServiceImpl extends CommonServiceImpl<Ciudad, CiudadRepository> implements CiudadService {
 
 	@Autowired

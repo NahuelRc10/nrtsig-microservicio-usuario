@@ -2,6 +2,7 @@ package nrt.microservicios.usuarios.app.controllers;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import nrt.microservicios.usuarios.app.services.AlumnoService;
 @RequestMapping("/alumno")
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 
+	@Autowired
 	private AlumnoService alumnoService;
 	
 	@PutMapping("/{id}")
