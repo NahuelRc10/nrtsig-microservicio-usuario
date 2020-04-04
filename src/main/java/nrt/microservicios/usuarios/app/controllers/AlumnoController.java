@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,6 +33,12 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 		}
 		Alumno alumnoAct = alumnoService.actualizarAlumno(alumno, id);
 		return new ResponseEntity<Alumno>(alumnoAct, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/ultimo-legajo")
+	public ResponseEntity<?> getUltimoLegajo() {
+		Long ultimoLegajo = alumnoService.obtenerUltimoLegajo();
+		return new ResponseEntity<Long>(ultimoLegajo, HttpStatus.OK);
 	}
 	
 }
