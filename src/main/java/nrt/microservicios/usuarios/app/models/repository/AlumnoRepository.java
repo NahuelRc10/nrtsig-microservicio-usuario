@@ -1,7 +1,5 @@
 package nrt.microservicios.usuarios.app.models.repository;
 
-import java.math.BigInteger;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

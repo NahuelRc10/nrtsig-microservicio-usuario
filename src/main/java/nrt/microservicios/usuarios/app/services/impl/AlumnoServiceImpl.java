@@ -5,14 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import nrt.microservicios.commons.services.CommonServiceImpl;
 import nrt.microservicios.usuarios.app.models.entity.Alumno;
+import nrt.microservicios.usuarios.app.models.entity.Domicilio;
 import nrt.microservicios.usuarios.app.models.repository.AlumnoRepository;
 import nrt.microservicios.usuarios.app.services.AlumnoService;
+import nrt.microservicios.usuarios.app.services.DomicilioService;
 
 @Service
 public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepository> implements AlumnoService {
 
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	@Autowired
+	private DomicilioService domicilioService;
 	
 	@Override
 	public Alumno actualizarAlumno(Alumno alumno, Long id) throws Exception {
@@ -45,6 +49,10 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		if (id != null) {
 			throw new Exception("El alumno ya existe en la base de datos");
 		}
+		
+		// Persistimos en la base el domicilio
+		Domicilio domicilioDb = domicilioService.save(alumno.getDomicilio());
+		alumno.setDomicilio(domicilioDb);
 		return alumnoRepository.save(alumno);
 	}
 
