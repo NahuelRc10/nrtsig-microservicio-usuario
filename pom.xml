@@ -61,6 +61,12 @@
 			<artifactId>commons-microservicios</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>nrtsig.microservicio.carrera.app</groupId>
+			<artifactId>nrtsig-microservicio-carreras</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
