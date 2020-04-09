@@ -3,7 +3,7 @@ package nrt.microservicios.usuarios.app.models.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import nrt.microservicios.usuarios.app.models.entity.Alumno;
+import nrt.microservicios.main.commons.usuario.entity.Alumno;
 
 public interface AlumnoRepository extends PagingAndSortingRepository<Alumno, Long> {
 

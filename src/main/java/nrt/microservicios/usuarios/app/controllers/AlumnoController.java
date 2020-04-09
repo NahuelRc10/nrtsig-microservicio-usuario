@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import nrt.microservicios.commons.controllers.CommonController;
-import nrt.microservicios.usuarios.app.models.entity.Alumno;
+import nrt.microservicios.main.commons.usuario.entity.Alumno;
 import nrt.microservicios.usuarios.app.services.AlumnoService;
 
 @RestController

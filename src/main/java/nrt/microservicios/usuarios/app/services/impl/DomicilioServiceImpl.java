@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nrt.microservicios.commons.services.CommonServiceImpl;
-import nrt.microservicios.usuarios.app.models.entity.Domicilio;
+import nrt.microservicios.main.commons.usuario.entity.Domicilio;
 import nrt.microservicios.usuarios.app.models.repository.DomicilioRepository;
 import nrt.microservicios.usuarios.app.services.DomicilioService;
 

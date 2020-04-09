@@ -22,6 +22,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>nrt.microservicios.main.commons</groupId>
+			<artifactId>nrtsig-microservicios-main</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -56,12 +61,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>nrtsig.microservicio.carrera.app</groupId> -->
-<!-- 			<artifactId>nrtsig-microservicio-carreras</artifactId> -->
-<!-- 			<version>0.0.1-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-
 		<dependency>
 			<groupId>nrt.microservicios.commons</groupId>
 			<artifactId>commons-microservicios</artifactId>

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nrt.microservicios.commons.services.CommonServiceImpl;
-import nrt.microservicios.usuarios.app.models.entity.Ciudad;
+import nrt.microservicios.main.commons.usuario.entity.Ciudad;
 import nrt.microservicios.usuarios.app.models.repository.CiudadRepository;
 import nrt.microservicios.usuarios.app.services.CiudadService;
 

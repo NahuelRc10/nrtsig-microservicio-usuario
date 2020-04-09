@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import nrt.microservicios.usuarios.app.models.entity.Pais;
+import nrt.microservicios.main.commons.usuario.entity.Pais;
 
 public interface PaisRepository extends CrudRepository<Pais, Long> {
 
