@@ -9,6 +9,6 @@ import nrt.microservicios.main.commons.usuario.entity.Ciudad;
 
 public interface CiudadRepository extends CrudRepository<Ciudad, Long>{
 
-	@Query("select c from Ciudad c where c.provincia.id = ?1")
+	@Query("select c from Ciudad c where c.provincia.id = ?1 order by c.nombre")
 	public List<Ciudad> findCiudadByIdProvincia(Long idProvincia);
 }
