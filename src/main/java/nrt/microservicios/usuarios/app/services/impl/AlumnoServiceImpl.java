@@ -3,6 +3,8 @@ package nrt.microservicios.usuarios.app.services.impl;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import nrt.microservicios.commons.services.CommonServiceImpl;
 import nrt.microservicios.main.commons.usuario.entity.Alumno;
 import nrt.microservicios.main.commons.usuario.entity.Domicilio;
@@ -38,7 +40,8 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		alumnoDb.setSexo(alumno.getSexo());
 		alumnoDb.setCiudad(alumno.getCiudad());
 		alumnoDb.setDomicilio(alumno.getDomicilio());
-		 
+		alumnoDb.setFoto(alumno.getFoto());
+
 		return alumnoRepository.save(alumnoDb);
 	}
 
