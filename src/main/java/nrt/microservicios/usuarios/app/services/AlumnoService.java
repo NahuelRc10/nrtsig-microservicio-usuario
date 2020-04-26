@@ -1,7 +1,5 @@
 package nrt.microservicios.usuarios.app.services;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import nrt.microservicios.commons.services.CommonService;
 import nrt.microservicios.main.commons.usuario.entity.Alumno;
 
