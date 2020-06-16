@@ -1,5 +1,7 @@
 package nrt.microservicios.usuarios.app.models.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -12,4 +14,12 @@ public interface AlumnoRepository extends PagingAndSortingRepository<Alumno, Lon
 	
 	@Query(value = "select max(a.legajo) from alumnos a", nativeQuery = true)
 	public Long getMaximoLegajo();
+	
+	// Query JPQL
+	@Query("select a from Alumno a where a.nombre like %?1% or a.apellido like %?1%")
+	public List<Alumno> getAlumnosByFilter(String filter);
+	
+	// Otra forma de buscar por filtro con query nativa sql
+//	@Query(value = "select * from alumnos a where a.nombre like %?1% or a.apellido like %?1%")
+//	public List<Alumno> getAlumnosByFilter(String filter);
 }

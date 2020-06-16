@@ -1,10 +1,14 @@
 package nrt.microservicios.usuarios.app.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -30,11 +34,13 @@ import nrt.microservicios.usuarios.app.services.AlumnoService;
 @RequestMapping("/alumno")
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 
+	private final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
 	@Autowired
 	private AlumnoService alumnoService;
 	
 	@PostMapping("/crear-con-foto")
 	public ResponseEntity<?> addWithPhoto(@Valid Alumno alumno, BindingResult result, @RequestParam MultipartFile archivo) throws IOException {
+		logger.debug("Ingresa a addWithPhoto()");
 		if (!archivo.isEmpty()) {
 			alumno.setFoto(archivo.getBytes());
 		}
@@ -43,6 +49,7 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 	
 	@GetMapping("/uploads/img/{id}")
 	public ResponseEntity<?> verFoto(@PathVariable Long id) {
+		logger.debug("Ingresa a verFoto()");
 		Optional<Alumno> alumno = alumnoService.findById(id);
 		if (alumno.isEmpty() || alumno.get().getFoto() == null) {
 			return ResponseEntity.notFound().build();
@@ -53,6 +60,7 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> editAlumno(@Valid @RequestBody Alumno alumno, BindingResult result, @PathVariable Long id) throws Exception {
+		logger.debug("Ingresa a editAlumno()");
 		// Validamos las restricciones de las propiedades del entity Alumno
 		if (result.hasErrors()) {
 			return this.validar(result);
@@ -64,6 +72,7 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 	@PutMapping("/editar-con-foto/{id}")
 	public ResponseEntity<?> editWithFoto(@Valid Alumno alumno, BindingResult result, @PathVariable Long id,
 			@RequestParam MultipartFile archivo) throws Exception {
+		logger.debug("Ingresa a editWithFoto()");
 		// Validamos las restricciones de las propiedades del entity Alumno
 		if (result.hasErrors()) {
 			return this.validar(result);
@@ -79,8 +88,17 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 	
 	@GetMapping("/ultimo-legajo")
 	public ResponseEntity<?> getUltimoLegajo() {
+		logger.debug("Ingresa a getUltimoLegajo()");
 		Long ultimoLegajo = alumnoService.obtenerUltimoLegajo();
 		return new ResponseEntity<Long>(ultimoLegajo, HttpStatus.OK);
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> searchAlumnoByFilter(@RequestParam(value = "filter", required = true) String filter) {
+		logger.debug("Ingresa a searchAlumnoByFilter()");
+		List<Alumno> alumnosByFilter = new ArrayList<Alumno>();
+		alumnosByFilter = alumnoService.obtenerAlumnosByFiltro(filter);
+		return new ResponseEntity<List<Alumno>>(alumnosByFilter, HttpStatus.OK);
 	}
 
 }

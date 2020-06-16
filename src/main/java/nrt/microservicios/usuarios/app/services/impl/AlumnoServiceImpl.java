@@ -1,5 +1,7 @@
 package nrt.microservicios.usuarios.app.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +54,12 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 			throw new Exception("El alumno ya existe en la base de datos");
 		}
 		
+		// Validamos que el cuit corresponda con el dni del alumno/a
+		boolean validaCuit = validarCuitAlumno(alumno.getCuit(), alumno.getNumeroDocumento().toString(), alumno.getSexo());
+		if (!validaCuit) {
+			throw new Exception("El CUIT no coincide con el Numero de Documento");
+		}
+		
 		// Persistimos en la base el domicilio
 		Domicilio domicilioDb = domicilioService.save(alumno.getDomicilio());
 		alumno.setDomicilio(domicilioDb);
@@ -63,8 +71,41 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		Long ultimoLegajo = alumnoRepository.getMaximoLegajo();
 		return ultimoLegajo;
 	}
-	
-	
-	
+
+	@Override
+	public boolean validarCuitAlumno(String cuit, String dni, String sexo) {
+		// Eliminamos todos los caracteres que no sean numeros
+		cuit = cuit.replaceAll("[^\\d]", "");
+		// Controllamos si son 11 numeros lo que quedaron, caso contrario return false
+		if (cuit.length() != 11) {
+			return false;
+		}
+		// Separamos en partes al cuit
+		String primeraParteCuit = cuit.substring(0, 2);
+		String segundaParteCuit = cuit.substring(2, 10);
+		// Controlamos la primera parte del cuit segun el sexo
+		if (sexo.equalsIgnoreCase("M")) {
+			if (!primeraParteCuit.equalsIgnoreCase("20")) {
+				return false;
+			}
+		} else {
+			if (!primeraParteCuit.equalsIgnoreCase("27")) {
+				return false;
+			}
+		}
+		// Validamos la segunda parte debe coincidir con el dni 
+		if (!segundaParteCuit.equalsIgnoreCase(dni)) {
+			return false;
+		}
+		// Si pasa todas las validaciones return true
+		return true;
+	}
+
+	@Override
+	public List<Alumno> obtenerAlumnosByFiltro(String filter) {
+		List<Alumno> alumnos = new ArrayList<Alumno>();
+		alumnos = alumnoRepository.getAlumnosByFilter(filter);
+		return alumnos;
+	}
 	
 }
