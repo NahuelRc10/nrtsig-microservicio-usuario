@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import nrt.microservicios.commons.services.CommonServiceImpl;
 import nrt.microservicios.main.commons.usuario.entity.Alumno;
@@ -84,6 +85,10 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		String primeraParteCuit = cuit.substring(0, 2);
 		String segundaParteCuit = cuit.substring(2, 10);
 		// Controlamos la primera parte del cuit segun el sexo
+		if (sexo != null || !(sexo.equalsIgnoreCase("M")) || !(sexo.equalsIgnoreCase("F"))) {
+			return false;
+		}
+		
 		if (sexo.equalsIgnoreCase("M")) {
 			if (!primeraParteCuit.equalsIgnoreCase("20")) {
 				return false;
@@ -106,6 +111,18 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		alumnos = alumnoRepository.getAlumnosByFilter(filter);
 		return alumnos;
+	}
+
+	@Override
+	public Alumno saveFotoPerfilAlumno(Long id, MultipartFile archivo) throws Exception {
+		Optional<Alumno> o = alumnoRepository.findById(id);
+		if (o.isEmpty()) {
+			throw new Exception("No existe el alumno a actualizar!");
+		}
+		
+		Alumno alumno = o.get();
+		alumno.setFoto(archivo.getBytes());
+		return alumnoRepository.save(alumno);
 	}
 	
 }

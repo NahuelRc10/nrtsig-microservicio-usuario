@@ -70,19 +70,15 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 	}
 	
 	@PutMapping("/editar-con-foto/{id}")
-	public ResponseEntity<?> editWithFoto(@Valid Alumno alumno, BindingResult result, @PathVariable Long id,
+	public ResponseEntity<?> editWithFoto(Alumno alumno, @PathVariable Long id,
 			@RequestParam MultipartFile archivo) throws Exception {
 		logger.debug("Ingresa a editWithFoto()");
-		// Validamos las restricciones de las propiedades del entity Alumno
-		if (result.hasErrors()) {
-			return this.validar(result);
-		}
-		
+
 		if (!archivo.isEmpty()) {
 			alumno.setFoto(archivo.getBytes());
 		}
 		
-		Alumno alumnoAct = alumnoService.actualizarAlumno(alumno, id);
+		Alumno alumnoAct = alumnoService.saveFotoPerfilAlumno(id, archivo);
 		return new ResponseEntity<Alumno>(alumnoAct, HttpStatus.CREATED);
 	}
 	
