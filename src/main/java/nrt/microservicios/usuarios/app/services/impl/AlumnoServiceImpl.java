@@ -84,10 +84,6 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		// Separamos en partes al cuit
 		String primeraParteCuit = cuit.substring(0, 2);
 		String segundaParteCuit = cuit.substring(2, 10);
-		// Controlamos la primera parte del cuit segun el sexo
-		if (sexo != null || !(sexo.equalsIgnoreCase("M")) || !(sexo.equalsIgnoreCase("F"))) {
-			return false;
-		}
 		
 		if (sexo.equalsIgnoreCase("M")) {
 			if (!primeraParteCuit.equalsIgnoreCase("20")) {
