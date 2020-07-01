@@ -2,6 +2,8 @@ package nrt.microservicios.usuarios.app.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +19,14 @@ import nrt.microservicios.usuarios.app.services.PaisService;
 @RequestMapping("/pais")
 public class PaisController extends CommonController<Pais, PaisService> {
 
+	private static final Logger logger = LoggerFactory.getLogger(PaisController.class);
 	@Autowired
 	private PaisService paisService;
 	
 	@Override
 	@GetMapping
 	public ResponseEntity<?> listar() {
+		logger.debug("Ingresa a listar()");
 		List<Pais> paises = paisService.getPaisesOrdenados();
 		return new ResponseEntity<List<Pais>>(paises, HttpStatus.OK);
 	}

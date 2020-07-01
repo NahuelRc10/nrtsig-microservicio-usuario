@@ -3,6 +3,9 @@ package nrt.microservicios.usuarios.app.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,7 @@ import nrt.microservicios.usuarios.app.services.DomicilioService;
 @Service
 public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepository> implements AlumnoService {
 
+	private static final Logger logger = LoggerFactory.getLogger(AlumnoServiceImpl.class);
 	@Autowired
 	private AlumnoRepository alumnoRepository;
 	@Autowired
@@ -24,6 +28,7 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 	
 	@Override
 	public Alumno actualizarAlumno(Alumno alumno, Long id) throws Exception {
+		logger.debug("Ingresa a actualizarAlumno()");
 		Optional<Alumno> o = alumnoRepository.findById(id);
 		if (o.isEmpty()) {
 			throw new Exception("No existe el alumno a actualizar!");
@@ -49,6 +54,7 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 
 	@Override
 	public Alumno save(Alumno alumno) throws Exception {
+		logger.debug("Ingresa a save()");
 		// Validamos que el alumno no exista en la base de datos
 		Long id = alumnoRepository.getIdAlumnoByTipoDocumentoAndNroDocumento(alumno.getTipoDocumento(), alumno.getNumeroDocumento());
 		if (id != null) {
@@ -69,12 +75,14 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 
 	@Override
 	public Long obtenerUltimoLegajo() {
+		logger.debug("Ingresa a obtenerUltimoLegajo");
 		Long ultimoLegajo = alumnoRepository.getMaximoLegajo();
 		return ultimoLegajo;
 	}
 
 	@Override
 	public boolean validarCuitAlumno(String cuit, String dni, String sexo) {
+		logger.debug("Ingresa a validarCuitAlumno()");
 		// Eliminamos todos los caracteres que no sean numeros
 		cuit = cuit.replaceAll("[^\\d]", "");
 		// Controllamos si son 11 numeros lo que quedaron, caso contrario return false
@@ -104,6 +112,7 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 
 	@Override
 	public List<Alumno> obtenerAlumnosByFiltro(String filter) {
+		logger.debug("Ingresa a obtenerAlumnosByFiltro()");
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		alumnos = alumnoRepository.getAlumnosByFilter(filter);
 		return alumnos;
@@ -111,6 +120,7 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 
 	@Override
 	public Alumno saveFotoPerfilAlumno(Long id, MultipartFile archivo) throws Exception {
+		logger.debug("Ingresa saveFotosPerfilAlumno()");
 		Optional<Alumno> o = alumnoRepository.findById(id);
 		if (o.isEmpty()) {
 			throw new Exception("No existe el alumno a actualizar!");
