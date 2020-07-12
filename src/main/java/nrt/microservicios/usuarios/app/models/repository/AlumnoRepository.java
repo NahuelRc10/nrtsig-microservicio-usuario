@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 import nrt.microservicios.main.commons.usuario.entity.Alumno;
 
+@Repository
 public interface AlumnoRepository extends PagingAndSortingRepository<Alumno, Long> {
 
 	@Query(value = "select a.id from alumnos a where a.tipo_documento = ?1 and a.nro_documento = ?2", nativeQuery = true)
