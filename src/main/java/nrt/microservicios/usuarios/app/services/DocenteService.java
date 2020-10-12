@@ -15,4 +15,5 @@ public interface DocenteService extends CommonService<Docente> {
 	public Docente saveDocente(DocenteDTO docenteDTO) throws Exception;
 	public DocenteDTO getDocenteById(Long id);
 	public DocenteDTO actualizarDatosDocente(Long id, DocenteDTO dto) throws Exception;
+	public List<Docente> buscarDocentesPorTermino(String termino);
 }

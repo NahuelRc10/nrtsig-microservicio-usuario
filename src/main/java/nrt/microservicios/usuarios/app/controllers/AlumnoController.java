@@ -97,4 +97,10 @@ public class AlumnoController extends CommonController<Alumno, AlumnoService> {
 		return new ResponseEntity<List<Alumno>>(alumnosByFilter, HttpStatus.OK);
 	}
 
+	@GetMapping("/filtrar-alumnos/{termino}")
+	public ResponseEntity<?> filtrarAlumnos(@PathVariable String termino) {
+		logger.debug("Ingresa a filtrarAlumnos()");
+		return ResponseEntity.ok(alumnoService.getAlumnosFiltrados(termino));
+	}
+
 }

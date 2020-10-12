@@ -24,4 +24,7 @@ public interface AlumnoRepository extends PagingAndSortingRepository<Alumno, Lon
 	// Otra forma de buscar por filtro con query nativa sql
 //	@Query(value = "select * from alumnos a where a.nombre like %?1% or a.apellido like %?1%")
 //	public List<Alumno> getAlumnosByFilter(String filter);
+
+	@Query("select d from Docente d where d.nombre like %?1% or d.apellido like %?1%")
+	public List<Alumno> findAlumnoByTermino(String termnino);
 }

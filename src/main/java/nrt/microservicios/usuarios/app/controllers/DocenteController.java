@@ -62,4 +62,10 @@ public class DocenteController extends CommonController<Docente, DocenteService>
         DocenteDTO docenteResponse = docenteService.actualizarDatosDocente(id, dto);
         return new ResponseEntity<DocenteDTO>(docenteResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping("/filtrar-por-nombre/{termino}")
+    public ResponseEntity<?> filtrarDocentesPorNombre(@PathVariable String termino) {
+        logger.debug("Ingresa a filtrarDocentesPorNombre()");
+        return new ResponseEntity<List<Docente>>(docenteService.buscarDocentesPorTermino(termino), HttpStatus.OK);
+    }
 }

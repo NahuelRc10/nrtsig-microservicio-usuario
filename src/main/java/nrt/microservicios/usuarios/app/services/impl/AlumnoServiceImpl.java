@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import nrt.microservicios.main.commons.carrera.entity.InscripcionAsignatura;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,5 +131,11 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		alumno.setFoto(archivo.getBytes());
 		return alumnoRepository.save(alumno);
 	}
-	
+
+	@Override
+	public List<Alumno> getAlumnosFiltrados(String termino) {
+		logger.debug("Ingresa a getAlumnosFiltrados()");
+		return alumnoRepository.getAlumnosByFilter(termino);
+	}
+
 }

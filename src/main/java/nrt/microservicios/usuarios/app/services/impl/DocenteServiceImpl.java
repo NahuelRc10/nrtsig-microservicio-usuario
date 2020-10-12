@@ -113,6 +113,13 @@ public class DocenteServiceImpl extends CommonServiceImpl<Docente, DocenteReposi
 		return entityToDto(docente);
 	}
 
+	@Override
+	public List<Docente> buscarDocentesPorTermino(String termino) {
+		logger.debug("Ingresa a buscarDocentesPorTermino()");
+		List<Docente> docentes = docenteRepository.findByNombre(termino);
+		return docentes;
+	}
+
 	private Docente dtoToEntity(DocenteDTO dto) {
 		Docente entity = new Docente();
 		entity.setNombre(dto.getNombre());
